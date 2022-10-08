@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  order: 2;
+}
+
+.input {
+  display: none;
+}
+
+.select {
+  cursor: pointer;
+  height: 50px;
+  overflow-y: hidden;
+
+  &-open {
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+}
+
+.option {
+
+  &-active {
+    border: 1px solid black;
+  }
+}
+
+.button {
+  width: 16px;
+  height: 16px;
+  background-image: url(../../assets/svg/select-open.svg);
+  background-position: center;
+
+  &-close {
+    background-image: url(../../assets/svg/select-close.svg);
+  }
+}
