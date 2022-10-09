@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  column-gap: 30px;
+  position: relative;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.error {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+}
+
+.button {
+  width: 25px;
+  height: 25px;
+  background: url(../../assets/svg/exchange-container-swap.svg) no-repeat center;
+}

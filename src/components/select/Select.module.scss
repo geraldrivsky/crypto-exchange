@@ -1,38 +1,105 @@
+@import '../../styles/variables';
+
 .container {
+  width: 150px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   order: 2;
+  padding-right: 15px;
+  cursor: pointer;
+
+  &Open {
+    width: 440px;
+    display: grid;
+    grid-template-columns: max-content min-content;
+    grid-template-rows: repeat(2, auto);
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 0;
+    z-index: 1;
+    background-color: #f6f7f8;
+    border: 1px solid #c1d9e6;
+    border-radius: 5px;
+
+    & .input {
+      display: initial;
+    }
+
+    & .select {
+      padding: 0;
+      width: 425px;
+      height: 150px;
+      overflow-y: scroll;
+      grid-column: 1 / -1;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: $light-gray;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $dark-gray;
+        border-radius: 5px;
+      }
+    }
+    
+    & .option {
+      padding: 0 15px;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
+
+    & .name {
+      color: $brand-color
+    }
+
+    & .button {
+      margin: 0;
+      grid-row-start: 1;
+      grid-column-end: -1;
+      justify-self: flex-end;
+    }
+  }
 }
 
 .input {
+  padding: 0 15px;
+  height: 50px;
   display: none;
+  border-radius: 5px;
+
+  &::placeholder {
+    color: $brand-color;
+  }
 }
 
 .select {
-  cursor: pointer;
+  padding-left: 5px;
+  margin-left: auto;
+  margin-right: auto;
   height: 50px;
-  overflow-y: hidden;
-
-  &-open {
-    max-height: 250px;
-    overflow-y: scroll;
-  }
+  overflow-x: hidden;
 }
 
 .option {
-
-  &-active {
-    border: 1px solid black;
-  }
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  height: 50px;
 }
 
 .button {
+  margin-left: 5px;
   width: 16px;
   height: 16px;
-  background-image: url(../../assets/svg/select-open.svg);
-  background-position: center;
+  background: url(../../assets/svg/select-open.svg) center no-repeat;
 
-  &-close {
+  &Open {
     background-image: url(../../assets/svg/select-close.svg);
   }
 }

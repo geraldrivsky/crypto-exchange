@@ -1,10 +1,10 @@
 import { FC, useEffect, useRef } from 'react';
-import cl from './CurrencyContainer.module.scss';
 import { ICurrency } from '../../models/ICurrency';
 import { Input, Select } from '..';
 import { ExchangeRole, HandleSelect } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { CryptoSlice } from '../../store/reducers/CryptoSlice';
+import cl from './CurrencyContainer.module.scss';
 
 interface CurrencyContainerProps {
   exchangeRole: ExchangeRole;

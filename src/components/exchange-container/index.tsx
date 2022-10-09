@@ -1,6 +1,5 @@
 import { FC, useEffect } from 'react';
 import { ICurrency } from '../../models/ICurrency';
-import { CurrencyContainer } from '../index';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { CryptoSlice } from '../../store/reducers/CryptoSlice';
 import {
@@ -8,6 +7,9 @@ import {
   fetchMinExchangeAmount,
 } from '../../store/reducers/ActionCreators';
 import { HandleSelect } from '../../types';
+import CurrencyContainer from '../currency-container';
+import cl from './ExchangeContainer.module.scss';
+import classNames from 'classnames';
 
 interface ExchangeContainerProps {
   currencies: ICurrency[];
@@ -53,7 +55,7 @@ const ExchangeContainer: FC<ExchangeContainerProps> = ({ currencies }) => {
           setAppError({
             type: 'UserAction',
             message:
-              'The amount of currency on the left should not be less than the minimum possible.',
+              'The amount of currency on the left should not be less than the minimum possible',
           })
         );
       }
@@ -80,19 +82,21 @@ const ExchangeContainer: FC<ExchangeContainerProps> = ({ currencies }) => {
   };
 
   return (
-    <div>
+    <div className={cl.container}>
       <CurrencyContainer
         currencies={currencies}
         exchangeRole='from'
         onSelect={handleSelect}
       />
-      <button onClick={handleSwap}>Swap</button>
+      <button className={cl.button} onClick={handleSwap}></button>
       <CurrencyContainer
         currencies={currencies}
         exchangeRole='to'
         onSelect={handleSelect}
       />
-      {appError.type && <h2 className='error'>{appError.message}</h2>}
+      {appError.type && (
+        <h2 className={classNames('error', cl.error)}>{appError.message}</h2>
+      )}
     </div>
   );
 };

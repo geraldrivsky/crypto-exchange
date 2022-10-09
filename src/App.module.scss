@@ -1,5 +1,5 @@
 .container {
-  padding: 220px 220px 230px;
+  padding: 120px 120px 130px;
 }
 
 .header {
@@ -8,4 +8,33 @@
 
 .subheader {
   margin-bottom: 60px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 0 15px;
+  display: inline-block;
+  width: 720px;
+  height: 50px;
+  background-color: #f6f7f8;
+  border: 1px solid #e3ebef;
+  border-radius: 5px;
+  margin-right: 40px;
+}
+
+.button {
+  width: 205px;
+  height: 50px;
+  background-color: #11b3fe;
+  border-radius: 5px;
+  font-weight: 700;
+  color: white;
+  
+  &:hover {
+    background-color: #0095e0;
+  }
 }

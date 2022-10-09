@@ -11,7 +11,7 @@ body {
   background-color: $background;
   color: $dark-gray;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 23px;
 }
 
@@ -56,7 +56,7 @@ button {
   font: inherit;
   cursor: pointer;
 }
-input[type='text'] {
+input {
   font: inherit;
   color: inherit;
   border: none;

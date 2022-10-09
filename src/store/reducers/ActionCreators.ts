@@ -26,7 +26,7 @@ export const fetchMinExchangeAmount = createAsyncThunk(
       );
       return minExchangeAmount.data;
     } catch {
-      return rejectWithValue('This pair is disabled now.');
+      return rejectWithValue('This pair is disabled now');
     }
   }
 );
@@ -53,7 +53,7 @@ export const fetchEstimatedExchangeAmount = createAsyncThunk(
       );
       return estimatedExchange.data;
     } catch {
-      return rejectWithValue('This pair is disabled now.');
+      return rejectWithValue('This pair is disabled now');
     }
   }
 );

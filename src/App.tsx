@@ -17,6 +17,11 @@ const App: FC = () => {
       {isLoading && <h2>Currencies loading...</h2>}
       {error && <h2 className='error'>Currencies fetching error.</h2>}
       {currencies && <ExchangeContainer currencies={currencies} />}
+      <label className={cl.label} htmlFor='ethereum-address'>
+        Your Ethereum address:
+      </label>
+      <input id='ethereum-address' required className={cl.input} type='text' />
+      <button className={cl.button}>EXCHANGE</button>
     </div>
   );
 };

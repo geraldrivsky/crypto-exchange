@@ -1,8 +1,8 @@
 @import '../../styles/variables';
 
 .container {
-  display: flex;
-  flex-flow: wrap;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   width: 440px;
   background-color: $light-gray;
