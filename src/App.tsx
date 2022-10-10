@@ -14,7 +14,7 @@ const App: FC = () => {
     <div className={cl.container}>
       <h1 className={cl.header}>Crypto Exchange</h1>
       <h2 className={cl.subheader}>Exchange fast and easy</h2>
-      {isLoading && <h2>Currencies loading...</h2>}
+      {isLoading && <h2 className={cl.loading}>Currencies loading...</h2>}
       {error && <h2 className='error'>Currencies fetching error.</h2>}
       {currencies && <ExchangeContainer currencies={currencies} />}
       <label className={cl.label} htmlFor='ethereum-address'>

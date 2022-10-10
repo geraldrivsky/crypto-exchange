@@ -55,13 +55,11 @@ export const CryptoSlice = createSlice({
     },
     setAmountFrom(state, { payload }: PayloadAction<string>) {
       state.amountFrom = payload;
-      state.appError = {
-        type: null,
-        message: '',
-      };
-    },
-    setAmountTo(state, { payload }: PayloadAction<string>) {
-      state.amountTo = payload;
+
+      if (state.appError.type === 'FetchingPair') {
+        return;
+      }
+
       state.appError = {
         type: null,
         message: '',

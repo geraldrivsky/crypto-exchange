@@ -17,7 +17,7 @@ const CurrencyContainer: FC<CurrencyContainerProps> = ({
   exchangeRole,
   onSelect,
 }) => {
-  const { setAmountFrom, setAmountTo } = CryptoSlice.actions;
+  const { setAmountFrom } = CryptoSlice.actions;
 
   const dispatch = useAppDispatch();
   const { minExchangeAmount, amountFrom, amountTo, appError } = useAppSelector(
@@ -53,11 +53,7 @@ const CurrencyContainer: FC<CurrencyContainerProps> = ({
   };
 
   const handleChange = (amount: string) => {
-    if (exchangeRole === 'from') {
-      dispatch(setAmountFrom(amount));
-    } else {
-      dispatch(setAmountTo(amount));
-    }
+    dispatch(setAmountFrom(amount));
   };
 
   return (

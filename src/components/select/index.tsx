@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import cl from './Select.module.scss';
 import { ExchangeRole } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -25,15 +25,10 @@ const Select: FC<SelectProps> = ({ currencies, onSelect, exchangeRole }) => {
   );
   const { setSearchFrom, setSearchTo } = CryptoSlice.actions;
 
-  const isFrom = exchangeRole === 'from';
-  const searchLC = isFrom ? searchFrom.toLowerCase() : searchTo.toLowerCase();
-
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    onSelect(currentTicker);
-    // eslint-disable-next-line
-  }, []);
+  const isFrom = exchangeRole === 'from';
+  const searchLC = isFrom ? searchFrom.toLowerCase() : searchTo.toLowerCase();
 
   let currentCurrency = currencies[0];
   let currentTicker = currentCurrency.ticker;
@@ -49,21 +44,31 @@ const Select: FC<SelectProps> = ({ currencies, onSelect, exchangeRole }) => {
     }
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const renderedCurrencies = isOpen ? currencies : [currentCurrency];
+
+  useEffect(() => {
+    onSelect(currentTicker);
+    // eslint-disable-next-line
+  }, []);
+
   const handleSearch = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
     isFrom ? dispatch(setSearchFrom(value)) : dispatch(setSearchTo(value));
   };
 
-  const filterCurrencies = ({ ticker, name }: SelectCurrency) =>
-    ticker.toLowerCase().includes(searchLC) ||
-    name.toLowerCase().includes(searchLC);
+  const filteredCurrencies = useMemo(() => {
+    return renderedCurrencies.filter(
+      ({ ticker, name }: SelectCurrency) =>
+        ticker.toLowerCase().includes(searchLC) ||
+        name.toLowerCase().includes(searchLC)
+    );
+  }, [renderedCurrencies, searchLC]);
 
   const clearSearch = () => {
     isFrom ? dispatch(setSearchFrom('')) : dispatch(setSearchTo(''));
   };
-
-  const renderedCurrencies = isOpen ? currencies : [currentCurrency];
 
   const containerClassName = classNames(cl.container, {
     [cl.containerOpen]: isOpen,
@@ -86,27 +91,25 @@ const Select: FC<SelectProps> = ({ currencies, onSelect, exchangeRole }) => {
         value={isFrom ? searchFrom : searchTo}
       />
       <div className={cl.select}>
-        {renderedCurrencies
-          .filter(filterCurrencies)
-          .map(({ ticker, image, name }) => {
-            return (
-              <div
-                key={ticker}
-                onClick={() => {
-                  if (isOpen) {
-                    onSelect(ticker);
-                    setIsOpen(false);
-                    clearSearch();
-                  }
-                }}
-                className={cl.option}
-              >
-                <img className={cl.img} src={image} alt='currency icon' />
-                <span>{ticker.toUpperCase()}</span>
-                {isOpen && <span className={cl.name}>{name}</span>}
-              </div>
-            );
-          })}
+        {filteredCurrencies.map(({ ticker, image, name }) => {
+          return (
+            <div
+              key={ticker}
+              onClick={() => {
+                if (isOpen) {
+                  onSelect(ticker);
+                  setIsOpen(false);
+                  clearSearch();
+                }
+              }}
+              className={cl.option}
+            >
+              <img className={cl.img} src={image} alt='currency icon' />
+              <span>{ticker.toUpperCase()}</span>
+              {isOpen && <span className={cl.name}>{name}</span>}
+            </div>
+          );
+        })}
       </div>
       <button
         onClick={() => {
